@@ -6,15 +6,16 @@ import java.awt.event.ActionListener;
 public class Main extends JApplet implements ActionListener {
 
     private Timer timer;
+    private Game game;
 
     @Override
     public void init() {
         //  Time in milliSeconds
-        timer = new Timer(1000, this);
-
+        timer = new Timer(20, this);
+        game = new Game();
         setLayout(new BorderLayout());
         setSize(600, 500);
-        add(new Game(), BorderLayout.CENTER);
+        add(game, BorderLayout.CENTER);
 
         System.out.println("Init Method Called.");
     }
@@ -39,6 +40,9 @@ public class Main extends JApplet implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         System.out.println("Timer is Running!");
+        game.update();
+
     }
 }
