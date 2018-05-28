@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Main extends JApplet implements ActionListener {
+public class Main extends JFrame implements ActionListener {
 
     private Timer timer;
     private Game game;
@@ -11,9 +11,9 @@ public class Main extends JApplet implements ActionListener {
 
     private CardLayout cards;
 
-    @Override
-    public void init() {
+    public Main() {
 
+        setDefault();
         cards = new CardLayout();
 
         //  Time in milliSeconds
@@ -32,25 +32,15 @@ public class Main extends JApplet implements ActionListener {
             }
         });
 
-        System.out.println("Init Method Called.");
-    }
-
-    @Override
-    public void start() {
-        System.out.println("Start Method Called.");
-
         timer.start();
+
+        System.out.println("Main Constructor Called.");
     }
 
-    @Override
-    public void stop() {
-        System.out.println("Stop Method Called.");
-        timer.stop();
-    }
-
-    @Override
-    public void destroy() {
-        System.out.println("Destroy Method Called.");
+    private void setDefault() {
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(true);
     }
 
     @Override
