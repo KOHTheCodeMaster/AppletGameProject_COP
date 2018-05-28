@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
@@ -71,13 +68,20 @@ public class Game extends JComponent {
             }
         });
 
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                buffer = null;
+            }
+        });
+
     }
 
     @Override
     public void paintComponent(Graphics g) {
 
-        //If Buffer is not initialized, if width or height of the Applet is changed, update buffer.
-        if (buffer == null || buffer.getWidth() != getWidth() || buffer.getHeight() != getHeight()) {
+        //If Buffer is null, update buffer.
+        if (buffer == null) {
             buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         }
         Graphics2D g2 = (Graphics2D) buffer.getGraphics();
