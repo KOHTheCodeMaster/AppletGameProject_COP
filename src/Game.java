@@ -108,9 +108,26 @@ public class Game extends JComponent {
         moveBall();
 
         checkBallOutOfScope();
+        checkBatOutOfScope();
         checkIntersection();
 
         repaint();
+    }
+
+    private void checkBatOutOfScope() {
+
+        if (bat.x < 0) {
+            bat.x = 0;
+        } else if (bat.x > getWidth() - bat.getBounds2D().getWidth()) {
+            bat.x = getWidth() - bat.getBounds2D().getWidth();
+        }
+
+        if (bat.y < 2) {
+            bat.y = 2;
+        } else if (bat.y > getHeight() - bat.getBounds2D().getHeight() - 2) {
+            bat.y = getHeight() - bat.getBounds2D().getHeight() - 2;
+        }
+
     }
 
     private void moveBall() {
