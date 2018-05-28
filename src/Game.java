@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -17,6 +18,7 @@ public class Game extends JComponent {
 
     private int xDirectionBall = 1;
     private int yDirectionBall = 1;
+    private int batSpeed = 10;
 
     public Game() {
 
@@ -44,6 +46,30 @@ public class Game extends JComponent {
 
         Cursor hiddenCursor = getToolkit().createCustomCursor(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), new Point(1, 1), "");
         setCursor(hiddenCursor);
+
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+
+                int key = e.getKeyCode();
+                switch (key) {
+                    case KeyEvent.VK_UP:
+                        bat.y -= batSpeed;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        bat.y += batSpeed;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        bat.x -= batSpeed;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        bat.x += batSpeed;
+                        break;
+                }
+
+                return false;
+            }
+        });
 
     }
 
