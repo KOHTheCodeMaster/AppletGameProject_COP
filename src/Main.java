@@ -9,20 +9,26 @@ public class Main extends JApplet implements ActionListener {
     private Game game;
     private StartPanel startPanel;
 
+    private CardLayout cards;
+
     @Override
     public void init() {
+
+        cards = new CardLayout();
+
         //  Time in milliSeconds
         timer = new Timer(17, this);
         game = new Game();
         startPanel = new StartPanel();
-        setLayout(new BorderLayout());
+        setLayout(cards);
         setSize(800, 600);
-        add(startPanel, BorderLayout.CENTER);
+        add(startPanel, "startPanel");
+        add(game, "game");
 
         startPanel.setStartPanelListener(new StartPanelListener() {
             @Override
             public void startGame() {
-                System.out.println("Clicked!");
+                cards.show(Main.this.getContentPane(), "game");
             }
         });
 
