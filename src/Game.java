@@ -11,7 +11,6 @@ public class Game extends JComponent {
 
     private Ellipse2D.Double ball = new Ellipse2D.Double(100, 100, 15, 15);
     private RoundRectangle2D.Double bat = new RoundRectangle2D.Double(200, 200, 100, 10, 20, 20);
-    private RoundRectangle2D.Double box1 = new RoundRectangle2D.Double(200, 300, 100, 10, 20, 20);
     private BufferedImage buffer;
 
     private int xDirectionBall = 1;
@@ -86,7 +85,6 @@ public class Game extends JComponent {
         //If Buffer is null, update buffer.
         if (buffer == null) {
             buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-
         }
 
         Graphics2D g2 = (Graphics2D) buffer.getGraphics();
@@ -112,16 +110,6 @@ public class Game extends JComponent {
         g2.setColor(Color.cyan);
         g2.fill(bat);
 
-        boolean drawOnceOnly = true;
-        if (drawOnceOnly) {
-
-            //  Draw White Box of Game.
-            g2.setColor(Color.white);
-            g2.drawRect(getWidth() / 6, 20, getWidth() - 2 * getWidth() / 6, getHeight() - 40);
-
-            drawOnceOnly = false;
-
-        }
     }
 
     void update() {

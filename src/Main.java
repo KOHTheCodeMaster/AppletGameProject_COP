@@ -5,23 +5,22 @@ import java.awt.event.ActionListener;
 
 public class Main extends JFrame implements ActionListener {
 
-    private Timer timer;
     private Game game;
-    private StartPanel startPanel;
-
     private CardLayout cards;
 
-    public Main() {
+    Main() {
 
+        //  Basic Frame Settings.
         setDefault();
-        cards = new CardLayout();
 
         //  Time in milliSeconds
-        timer = new Timer(17, this);
+        Timer timer = new Timer(17, this);
+
         game = new Game();
-        startPanel = new StartPanel();
+        StartPanel startPanel = new StartPanel();
+
+        cards = new CardLayout();
         setLayout(cards);
-        setSize(800, 600);
         add(startPanel, "startPanel");
         add(game, "game");
 
@@ -38,6 +37,8 @@ public class Main extends JFrame implements ActionListener {
     }
 
     private void setDefault() {
+
+        setSize(800, 600);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
