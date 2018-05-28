@@ -7,15 +7,24 @@ public class Main extends JApplet implements ActionListener {
 
     private Timer timer;
     private Game game;
+    private StartPanel startPanel;
 
     @Override
     public void init() {
         //  Time in milliSeconds
         timer = new Timer(17, this);
         game = new Game();
+        startPanel = new StartPanel();
         setLayout(new BorderLayout());
         setSize(800, 600);
-        add(game, BorderLayout.CENTER);
+        add(startPanel, BorderLayout.CENTER);
+
+        startPanel.setStartPanelListener(new StartPanelListener() {
+            @Override
+            public void startGame() {
+                System.out.println("Clicked!");
+            }
+        });
 
         System.out.println("Init Method Called.");
     }
@@ -41,7 +50,7 @@ public class Main extends JApplet implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        System.out.println("Timer is Running!");
+        //System.out.println("Timer is Running!");
         game.update();
 
     }
