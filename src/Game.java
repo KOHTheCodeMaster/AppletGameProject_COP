@@ -17,6 +17,8 @@ public class Game extends JComponent {
     private int yDirectionBall = 1;
     private int batSpeed = 10;
 
+    private boolean isIntersecting = true;
+
     public Game() {
 
         addMouseMotionListener(new MouseMotionListener() {
@@ -103,9 +105,23 @@ public class Game extends JComponent {
 
     void update() {
 
+        moveBall();
+
+        checkBallOutOfScope();
+        checkIntersection();
+
+        repaint();
+    }
+
+    private void moveBall() {
+
         double speed = 10.0;
         ball.x += xDirectionBall * speed;
         ball.y += yDirectionBall * speed;
+
+    }
+
+    private void checkBallOutOfScope() {
 
         if (ball.x < 0) {
             xDirectionBall = 1; //  Keep Movement in Right Direction.
@@ -123,7 +139,20 @@ public class Game extends JComponent {
             ball.y = getHeight() - ball.getBounds().height;
         }
 
-        repaint();
+    }
+
+    private void checkIntersection() {
+
+        if (ball.intersects(bat.getBounds2D())) {
+            if (isIntersecting) {
+                xDirectionBall = -xDirectionBall;
+                yDirectionBall = -yDirectionBall;
+
+                isIntersecting = false;
+            }
+        } else
+            isIntersecting = true;
+
     }
 
     @Override
