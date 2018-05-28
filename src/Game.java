@@ -15,7 +15,6 @@ public class Game extends JComponent {
     private RoundRectangle2D.Double bat = new RoundRectangle2D.Double(200, 200, 100, 10, 20, 20);
     private BufferedImage buffer;
 
-    private double speed = 10.0;
     private int xDirectionBall = 1;
     private int yDirectionBall = 1;
 
@@ -29,6 +28,7 @@ public class Game extends JComponent {
 
             @Override
             public void mouseMoved(MouseEvent e) {
+                //Move Bat accoeding to the Mouse Co-ordinates.
                 bat.x = e.getX() - bat.getWidth() / 2;
                 bat.y = e.getY() - bat.getHeight() / 2;
             }
@@ -42,12 +42,16 @@ public class Game extends JComponent {
             }
         });
 
+        Cursor hiddenCursor = getToolkit().createCustomCursor(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), new Point(1, 1), "");
+        setCursor(hiddenCursor);
+
     }
 
     @Override
     public void paintComponent(Graphics g) {
 
-        if (buffer == null) {
+        //If Buffer is not initialized, if width or height of the Applet is changed, update buffer.
+        if (buffer == null || buffer.getWidth() != getWidth() || buffer.getHeight() != getHeight()) {
             buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         }
         Graphics2D g2 = (Graphics2D) buffer.getGraphics();
@@ -67,8 +71,9 @@ public class Game extends JComponent {
 
     }
 
-    public void update() {
+    void update() {
 
+        double speed = 10.0;
         ball.x += xDirectionBall * speed;
         ball.y += yDirectionBall * speed;
 

@@ -11,10 +11,10 @@ public class Main extends JApplet implements ActionListener {
     @Override
     public void init() {
         //  Time in milliSeconds
-        timer = new Timer(20, this);
+        timer = new Timer(17, this);
         game = new Game();
         setLayout(new BorderLayout());
-        setSize(600, 500);
+        setSize(800, 600);
         add(game, BorderLayout.CENTER);
 
         System.out.println("Init Method Called.");
